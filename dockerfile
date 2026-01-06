@@ -1,5 +1,5 @@
 FROM python:latest
-WORKDIR /rest_service
+WORKDIR root
 COPY requirements.txt requirements.txt
 RUN python3 -m venv .venv
 RUN . .venv/bin/activate
