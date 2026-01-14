@@ -3,6 +3,7 @@ pytest
 fastapi
 fastapi[standard]
 pydantic-settings
+requests
 uvicorn
 opentelemetry-sdk
 opentelemetry-api
