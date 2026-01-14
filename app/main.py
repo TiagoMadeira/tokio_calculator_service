@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from app.routers import calculator
+from app.utils import otel_trace_init
 import uvicorn
 
 
