@@ -1,25 +1,21 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from opentelemetry import trace
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from app.routers import calculator
 import uvicorn
 
-# --------------------------
-# OpenTelemetry Tracing
-# --------------------------
-def otel_trace_init():
-    trace.set_tracer_provider(
-       TracerProvider(
-           resource=Resource.create({}),
-       ),
-    )
 
+
+
+#Init otel tracel
 otel_trace_init()
+#Instrument the requests module
+RequestsInstrumentor().instrument()
+
 app = FastAPI()
 FastAPIInstrumentor().instrument_app(app)
+
 app.include_router(calculator.router)
 
 @app.get('/heatlhz')
