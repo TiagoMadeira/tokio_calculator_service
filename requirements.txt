@@ -1,0 +1,12 @@
+httpx
+pytest
+fastapi
+fastapi[standard]
+pydantic-settings
+requests
+uvicorn
+opentelemetry-sdk
+opentelemetry-api
+opentelemetry-exporter-otlp-proto-grpc==1.12.0
+opentelemetry-instrumentation-requests==0.43b0
+opentelemetry-instrumentation-fastapi==0.43b0
