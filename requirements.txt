@@ -1,6 +1,5 @@
 httpx
 pytest
-fastapi
 fastapi[standard]
 pydantic-settings
 requests
