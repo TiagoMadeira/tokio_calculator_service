@@ -7,14 +7,16 @@ on:
     branches: [master, development]
 
 jobs:
+  determine-environment:
+    uses: TiagoMadeira/tokio_reusable_workflows/.github/workflows/determine_environment.yaml@v2
+
   test:
-    uses: TiagoMadeira/tokio_reusable_workflows/.github/workflows/test_python_app.yaml@v1
-    with:
-      python-version: "3.12.3"
+    uses: TiagoMadeira/tokio_reusable_workflows/.github/workflows/test_python_app.yaml@v2
   
   build-push:
     runs-on: ubuntu-latest
-    environment: staging
+    needs: [test, determine-environment ]
+    environment: ${{needs.determine-environment.outputs.selected-environment}}
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -49,5 +51,3 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ steps.meta.outputs.tags }}
           file: dockerfile
-
-    needs: [test]
